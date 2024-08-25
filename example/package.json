@@ -20,7 +20,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/react-dom": "^18"
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.5.4"
   },
   "nohoist": [
     "**/react",
