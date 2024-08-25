@@ -11,12 +11,13 @@ export const WebToolbar = ({ editor }) => {
 
   return (
     <View style={{ flexDirection: "row" }}>
-      {DEFAULT_TOOLBAR_ITEMS.map(({ onPress, disabled, active, image }) => {
+      {DEFAULT_TOOLBAR_ITEMS.map(({ onPress, disabled, active, image }, i) => {
         return (
           <TouchableOpacity
             onPress={onPress(args)}
             disabled={disabled(args)}
             style={[editor.theme.toolbar.toolbarButton]}
+            key={i}
           >
             <View
               style={[
