@@ -41,7 +41,8 @@
     "lib",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "!example"
   ],
   "react-native-builder-bob": {
     "source": "src",
