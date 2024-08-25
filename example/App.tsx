@@ -1,22 +1,63 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { WebView } from "react-native-webview";
+import {
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+} from "react-native";
+import { RichText, Toolbar, useEditorBridge } from "@10play/tentap-editor";
+import { WebToolbar } from "./src/WebToolbar";
+import { useEffect } from "react";
 
-export default function App() {
+const App = () => {
+  const editor = useEditorBridge({
+    autofocus: true,
+    avoidIosKeyboard: true,
+    initialContent,
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (Platform.OS === "web") {
+        editor.injectJS(`
+          window.ReactNativeWebView = { postMessage: (...args) => window.parent.postMessage(args[0])}
+        `);
+      }
+    }, 100);
+  }, []);
+
+  if (Platform.OS !== "web") {
+    return (
+      <SafeAreaView style={exampleStyles.fullScreen}>
+        <RichText editor={editor} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={exampleStyles.keyboardAvoidingView}
+        >
+          <Toolbar editor={editor} />
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <WebView source={{ html: "<h1>Hi</h1>" }} />
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={exampleStyles.fullScreen}>
+      <WebToolbar editor={editor} />
+      <RichText editor={editor} />
+    </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
+const exampleStyles = StyleSheet.create({
+  fullScreen: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  keyboardAvoidingView: {
+    position: "absolute",
+    width: "100%",
+    bottom: 0,
   },
 });
+
+const initialContent = `<p>This is a basic example!</p>`;
+
+export default App;

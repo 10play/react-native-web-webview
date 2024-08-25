@@ -2,12 +2,14 @@ import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   type ReactEventHandler,
 } from "react";
 import { StyleSheet } from "react-native";
 import WebView, { type WebViewProps } from "react-native-webview";
 import type { WebViewSourceHtml } from "react-native-webview/lib/WebViewTypes";
+import { replaceLast } from "./utils";
 
 interface WebWebviewProps extends WebViewProps {
   title?: string;
@@ -19,16 +21,24 @@ export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
   const styleObj = StyleSheet.flatten(style);
 
   // Get iframe source
-  const getSource = () => {
+  const _source = useMemo(() => {
     // TODO: support other source types
     if (!source) return undefined;
     // TODO: support base url
     if ((source as WebViewSourceHtml).html) {
       const pageHtml = (source as WebViewSourceHtml).html;
-      return pageHtml;
+      // Inject javascript
+      const jsToInject = `${props.injectedJavaScript ?? ""} ${
+        props.injectedJavaScriptBeforeContentLoaded ?? ""
+      }`;
+      return replaceLast(
+        pageHtml,
+        "</body>",
+        `<script>${jsToInject}</script></body>`
+      );
     }
     return undefined;
-  };
+  }, []);
 
   // Initialize ref - most functions here are mocked - we should implement them
   useImperativeHandle(
@@ -81,7 +91,7 @@ export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
     <iframe
       title={title}
       ref={iframeRef}
-      srcDoc={getSource()}
+      srcDoc={_source}
       width={styleObj.width?.toString()}
       height={styleObj.height?.toString()}
       style={
