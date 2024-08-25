@@ -74,5 +74,10 @@
   ],
   "workspaces": [
     "example"
-  ]
+  ],
+  "author": "Amir Angel <36531255+17Amir17@users.noreply.github.com> (https://www.10play.dev)",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }
