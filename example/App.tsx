@@ -6,7 +6,6 @@ import {
 } from "react-native";
 import { RichText, Toolbar, useEditorBridge } from "@10play/tentap-editor";
 import { WebToolbar } from "./src/WebToolbar";
-import { useEffect } from "react";
 
 const App = () => {
   const editor = useEditorBridge({
@@ -14,16 +13,6 @@ const App = () => {
     avoidIosKeyboard: true,
     initialContent,
   });
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (Platform.OS === "web") {
-        editor.injectJS(`
-          window.ReactNativeWebView = { postMessage: (...args) => window.parent.postMessage(args[0])}
-        `);
-      }
-    }, 100);
-  }, []);
 
   if (Platform.OS !== "web") {
     return (

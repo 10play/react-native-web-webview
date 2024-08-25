@@ -15,6 +15,9 @@ interface WebWebviewProps extends WebViewProps {
   title?: string;
 }
 
+// This js adds a postMessage function to the webview
+const DEFAULT_INJECT_JS = `window.ReactNativeWebView = { postMessage: (...args) => window.parent.postMessage(args[0])}`;
+
 export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
   const { title, source, onLoad, scrollEnabled, style } = props;
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -28,9 +31,9 @@ export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
     if ((source as WebViewSourceHtml).html) {
       const pageHtml = (source as WebViewSourceHtml).html;
       // Inject javascript
-      const jsToInject = `${props.injectedJavaScript ?? ""} ${
-        props.injectedJavaScriptBeforeContentLoaded ?? ""
-      }`;
+      const jsToInject = `${DEFAULT_INJECT_JS} ${
+        props.injectedJavaScript ?? ""
+      } ${props.injectedJavaScriptBeforeContentLoaded ?? ""}`;
       return replaceLast(
         pageHtml,
         "</body>",
