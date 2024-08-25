@@ -68,5 +68,8 @@
   "eslintIgnore": [
     "node_modules/",
     "lib/"
+  ],
+  "workspaces": [
+    "example"
   ]
 }
