@@ -17,6 +17,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@10play/react-native-web-webview@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@10play/react-native-web-webview@workspace:."
+  dependencies:
+    "@types/react": "npm:^18.3.4"
+    react: "npm:^16.13.1"
+    react-dom: "npm:^16.13.1"
+    react-native: "npm:0.74.5"
+    react-native-builder-bob: "npm:^0.30.0"
+    react-native-webview: "npm:^13.11.1"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+    react-native: "*"
+    react-native-web: "*"
+  languageName: unknown
+  linkType: soft
+
 "@10play/tentap-editor@npm:^0.5.18":
   version: 0.5.18
   resolution: "@10play/tentap-editor@npm:0.5.18"
@@ -11429,24 +11447,6 @@ __metadata:
   checksum: 10c0/2907f2570a98fbf5d346c0f32befc5a7cc34cf0b74f74afc7133330b7de505889f6f81d12c14057312938a93020403bd8c648aed60cbf14a17d6e4ee450ac67a
   languageName: node
   linkType: hard
-
-"react-native-web-webview@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "react-native-web-webview@workspace:."
-  dependencies:
-    "@types/react": "npm:^18.3.4"
-    react: "npm:^16.13.1"
-    react-dom: "npm:^16.13.1"
-    react-native: "npm:0.74.5"
-    react-native-builder-bob: "npm:^0.30.0"
-    react-native-webview: "npm:^13.11.1"
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-    react-native: "*"
-    react-native-web: "*"
-  languageName: unknown
-  linkType: soft
 
 "react-native-web@npm:~0.19.10":
   version: 0.19.12
