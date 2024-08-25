@@ -16,20 +16,15 @@
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
     "react-native-web": "~0.19.10",
-    "react-native-web-webview": "workspace:*"
+    "react-native-web-webview": "file:../lib/module"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@expo/webpack-config": "~19.0.1",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18",
     "@types/react-native": "^0.73.0",
     "typescript": "^5.5.4"
   },
-  "nohoist": [
-    "**/react",
-    "**/react-dom",
-    "**/expo",
-    "**/@expo"
-  ],
   "private": true
 }
