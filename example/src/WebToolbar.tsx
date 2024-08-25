@@ -1,8 +1,11 @@
 import { Image, TouchableOpacity, View } from "react-native";
-import { useBridgeState, DEFAULT_TOOLBAR_ITEMS } from "@10play/tentap-editor";
-import React from "react";
+import {
+  useBridgeState,
+  DEFAULT_TOOLBAR_ITEMS,
+  EditorBridge,
+} from "@10play/tentap-editor";
 
-export const WebToolbar = ({ editor }) => {
+export const WebToolbar = ({ editor }: { editor: EditorBridge }) => {
   const editorState = useBridgeState(editor);
   const args: any = {
     editor,
