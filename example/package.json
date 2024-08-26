@@ -1,0 +1,33 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@10play/tentap-editor": "^0.5.18",
+    "@expo/metro-runtime": "~3.2.3",
+    "expo": "~51.0.28",
+    "expo-crypto": "~13.0.2",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-web": "~0.19.10",
+    "react-native-web-webview": "file:../lib/module",
+    "react-native-webview": "13.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@expo/webpack-config": "~19.0.1",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.5.4"
+  },
+  "private": true
+}
