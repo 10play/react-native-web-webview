@@ -31,8 +31,8 @@
       }
     },
     "./shim": {
-      "import": "./lib/module/index.js",
-      "require": "./lib/commonjs/index.js"
+      "import": "./lib/module/shim.js",
+      "require": "./lib/commonjs/shim.js"
     }
   },
   "scripts": {
