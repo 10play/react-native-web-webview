@@ -59,12 +59,10 @@ module.exports = async function (env, argv) {
   config.resolve.alias = {
     ...config.resolve.alias,
 
-    // Set up aliases so the web versions are used (Rather than changing imports in each file)
     "react-native": "react-native-web",
-    "react-native-webview": "react-native-web-webview",
+    "react-native-webview": "@10play/react-native-web-webview",
   };
 
-  // Return the config for use by webpack
   return config;
 };
 ```
