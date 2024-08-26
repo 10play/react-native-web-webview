@@ -10,10 +10,6 @@ module.exports = async function (env, argv) {
     // Set up aliases so the web versions are used (Rather than changing imports in each file)
     "react-native": "react-native-web",
     "react-native-webview": "react-native-web-webview",
-    "react-native/Libraries/Utilities/codegenNativeComponent": path.resolve(
-      __dirname,
-      "node_modules/react-native-web-webview/shim.js"
-    ),
   };
 
   config.resolve.fallback = {
