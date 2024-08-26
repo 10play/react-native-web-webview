@@ -24,7 +24,7 @@ resolve: {
     alias: {
         'react-native': 'react-native-web',
         ...
-        'react-native-webview': 'react-native-web-webview',
+        'react-native-webview': '@10play/react-native-web-webview',
     }
 }
 ```
