@@ -13,7 +13,7 @@ Based on https://github.com/react-native-web-community/react-native-web-webview
 Installing
 
 ```
-yarna dd react-native-web-webview
+yarn add @10play/react-native-web-webview
 ```
 
 The package provides the same functionality as react-native-webview, however, it works when exported as a web project.
