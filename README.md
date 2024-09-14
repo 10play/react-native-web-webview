@@ -66,3 +66,43 @@ module.exports = async function (env, argv) {
   return config;
 };
 ```
+### Update for Expo SDK 51: use metro instead of webpack
+Expo's SDK 51 does not support webpack out of the box as in past versions. They suggest using metro instead.
+
+So to replace the metro.config.js instructions above, create in the root of your project a metro.config.js file.
+In that place:
+
+```js
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require('expo/metro-config');
+
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
+
+const ALIASES = {
+    'react-native': 'react-native-web',
+    'react-native-webview': '@10play/react-native-web-webview'
+};
+
+/**
+ * This maps moduleName: string -> newmoduleName: string given co
+ * @param {T} context 
+ * @param {string} moduleName 
+ * @param {string} platform   in {"web", ... }
+ * @returns 
+ */
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+    // Ensure you call the default resolver.
+    if (platform === 'web') {
+        return context.resolveRequest(
+            context,
+            // Use an alias if one exists.
+            ALIASES[moduleName] ?? moduleName,
+            platform
+        );
+    } 
+    return context.resolveRequest(context, moduleName, platform);
+
+};
+module.exports = config;
+```
