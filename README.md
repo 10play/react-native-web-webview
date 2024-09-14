@@ -72,7 +72,7 @@ Expo's SDK 51 does not support webpack out of the box as in past versions. They 
 So to replace the metro.config.js instructions above, create in the root of your project a metro.config.js file.
 In that place:
 
-```
+```js
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
 
