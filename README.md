@@ -66,7 +66,7 @@ module.exports = async function (env, argv) {
   return config;
 };
 ```
-### Update for Expo SDK 51: SDK 51 use metro
+### Update for Expo SDK 51: use metro instead of webpack
 Expo's SDK 51 does not support webpack out of the box as in past versions. They suggest using metro instead.
 
 So to replace the metro.config.js instructions above, create in the root of your project a metro.config.js file.
