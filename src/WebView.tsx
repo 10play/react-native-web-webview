@@ -74,7 +74,9 @@ export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
         },
         clearHistory: () => {},
         clearFormData: () => {},
-      } as unknown as WebView)
+      } as unknown as WebView),
+    // The handle only reads iframeRef, so one handle serves every render.
+    []
   );
 
   // The latest onMessage, so the listener below never calls a stale one
