@@ -77,12 +77,18 @@ export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
       } as unknown as WebView)
   );
 
+  // The latest onMessage, so the listener below never calls a stale one
+  const onMessageRef = useRef(props.onMessage);
+  onMessageRef.current = props.onMessage;
+
   useEffect(() => {
-    // Listen for messages
-    if (!props.onMessage) return;
+    // Listen for messages. Every iframe posts to the same window, so only
+    // handle the ones sent by this WebView's own iframe.
     const onMessage = (nativeEvent: MessageEvent) => {
+      const contentWindow = iframeRef.current?.contentWindow;
+      if (!contentWindow || nativeEvent.source !== contentWindow) return;
       // @ts-ignore
-      return props.onMessage({ nativeEvent });
+      return onMessageRef.current?.({ nativeEvent });
     };
     window.addEventListener("message", onMessage, true);
     return () => {
