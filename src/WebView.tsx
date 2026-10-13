@@ -31,9 +31,17 @@ export const WebWebView = forwardRef<WebView, WebWebviewProps>((props, ref) => {
     if ((source as WebViewSourceHtml).html) {
       const pageHtml = (source as WebViewSourceHtml).html;
       // Inject javascript
-      const jsToInject = `${DEFAULT_INJECT_JS} ${
-        props.injectedJavaScript ?? ""
-      } ${props.injectedJavaScriptBeforeContentLoaded ?? ""}`;
+      // Each script ends its own statement, so the next one can't be read as
+      // its continuation (a script starting with `(` or `[`, say).
+      const jsToInject = [
+        DEFAULT_INJECT_JS,
+        props.injectedJavaScript,
+        props.injectedJavaScriptBeforeContentLoaded,
+      ]
+        .filter(Boolean)
+        .join(";\n")
+        // A literal "</script" would end the script tag early
+        .replace(/<\/script/gi, "<\\/script");
       return replaceLast(
         pageHtml,
         "</body>",
